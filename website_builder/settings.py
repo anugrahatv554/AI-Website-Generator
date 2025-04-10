@@ -78,29 +78,6 @@ WSGI_APPLICATION = 'website_builder.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / "db.sqlite3",
-#     },
-#     'mongo': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'ai-website-builder',
-#         'ENFORCE_SCHEMA': False,
-#         'CLIENT': {
-#             'host': 'mongodb+srv://admin:Admin%40123@cluster0.diqfaaa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
-#             'tlsCAFile': certifi.where(),
-#         }
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
@@ -112,9 +89,6 @@ DATABASES = {
         }
     }
 }
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

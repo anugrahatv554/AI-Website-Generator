@@ -6,23 +6,35 @@
     body { font-family: Arial; margin: 40px; }
     input, button { padding: 10px; margin: 10px 0; width: 100%; }
     .output { margin-top: 20px; padding: 15px; background: #f4f4f4; border-radius: 8px; }
+    #loading { 
+      color: green; 
+      font-weight: bold; 
+      margin-top: 20px; 
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <h1>🧠 AI Website Builder</h1>
+  <h1>AI Website Builder</h1>
   <form id="builderForm">
     <input type="text" id="businessType" placeholder="Business Type (e.g., Bakery)" required />
     <input type="text" id="industry" placeholder="Industry (e.g., Food)" required />
     <button type="submit">Generate Website</button>
   </form>
 
-  <div class="output" id="output"></div>
+  <!-- <div class="output" id="output"></div> -->
+
+  <div id="loading">Generating Website... Please wait ⏳</div>
 
   <script>
     document.getElementById("builderForm").addEventListener("submit", async function(e) {
       e.preventDefault();
+
       const businessType = document.getElementById("businessType").value;
       const industry = document.getElementById("industry").value;
+
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("output").innerText = "";
 
       const response = await fetch("/api/generator/generate/", {
         method: "POST",
@@ -36,13 +48,13 @@
       const data = await response.json();
 
       if (data.success) {
-        window.location.href = "/api/generator/preview/";  // 👈 Redirect after successful generation
+        window.location.href = data.redirect_url;
       } else {
         document.getElementById("output").innerText = "Error generating website.";
+        document.getElementById("loading").style.display = "none";
       }
     });
 
-    // CSRF token helper
     function getCookie(name) {
       let cookieValue = null;
       if (document.cookie && document.cookie !== "") {
